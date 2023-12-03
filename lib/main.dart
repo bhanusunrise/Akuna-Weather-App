@@ -1,6 +1,8 @@
 import 'package:akuna/info.dart';
+import 'package:akuna/services/weather_service.dart';
 import 'package:flutter/material.dart';
 import 'components.dart';
+import 'model/weather.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,10 +45,19 @@ class _MyHomePageState extends State<MyHomePage> {
         opacity = 0.0;
       });
       // Navigate to the info screen after fade-out
-      Future.delayed(const Duration(seconds: 1), () {
+      Future.delayed(const Duration(seconds: 1), () async {
+        WeatherService weatherService = WeatherService();
+        Weather weather = await weatherService.getWeatherData("Colombo");
+        const String cityName = "Colombo";
+        double temp = weather.currentTemp;
+        String temperature = "$temp°C";
+        String condition = weather.condition;
+        String country = weather.country;
+        String geticon = weather.icon;
+        String icon = "http:$geticon";
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const InfoScreen(cityName: 'Colombo', temperature: '28C', status: 'Cloudy', time:'00:01')),
+          MaterialPageRoute(builder: (context) => InfoScreen(cityName: cityName, temperature: temperature, status: condition, country:country, icon: icon)),
         );
       });
     });

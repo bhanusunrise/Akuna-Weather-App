@@ -53,3 +53,84 @@ class SplashLogo extends StatelessWidget {
     );
   }
 }
+
+class NavBar extends StatelessWidget implements PreferredSizeWidget{
+  final String cityName;
+  final String time;
+
+  const NavBar({
+    Key? key,
+    required this.cityName,
+    required this.time,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0, // Remove the elevation
+
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 10.0),
+        child: Image.asset('assets/logo/logo.png', height: 60, width: 60,),
+      ),
+
+      title: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              cityName,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              time,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 10.0),
+          child: Image.asset('assets/search/search.png', height: 50, width: 50,),
+        ),
+      ],
+    );
+  }
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+class WeatherImage extends StatelessWidget {
+  final String imageUrl;
+  final double width;
+  final double height;
+
+  const WeatherImage({
+    Key? key,
+    required this.imageUrl,
+    required this.width,
+    required this.height,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: Image.network(
+        imageUrl,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+}
