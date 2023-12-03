@@ -33,7 +33,30 @@ class InfoScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   WeatherImage(imageUrl: icon, width: 150.0, height: 150.0),
+                  WeatherText(text: "$status | $temperature"),
+                  SizedBox(height: 20.0), // Add some spacing
 
+                  // Two columns next to each other
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // First Column
+                      Column(
+                        children: [
+                          Text('Left Column Content'),
+                          // Add more widgets as needed
+                        ],
+                      ),
+                      SizedBox(width: 20.0), // Add spacing between columns
+                      // Second Column
+                      Column(
+                        children: [
+                          Text('Right Column Content'),
+                          // Add more widgets as needed
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -43,3 +66,4 @@ class InfoScreen extends StatelessWidget {
     );
   }
 }
+

@@ -46,11 +46,12 @@ class _MyHomePageState extends State<MyHomePage> {
       });
       // Navigate to the info screen after fade-out
       Future.delayed(const Duration(seconds: 1), () async {
-        WeatherService weatherService = WeatherService();
-        Weather weather = await weatherService.getWeatherData("Colombo");
         const String cityName = "Colombo";
+        WeatherService weatherService = WeatherService();
+        Weather weather = await weatherService.getWeatherData(cityName);
+
         double temp = weather.currentTemp;
-        String temperature = "$temp°C";
+        String temperature = "$temp °C";
         String condition = weather.condition;
         String country = weather.country;
         String geticon = weather.icon;
