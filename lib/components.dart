@@ -114,26 +114,32 @@ class WeatherImage extends StatelessWidget {
   final String imageUrl;
   final double width;
   final double height;
+  final double paddingTop; // Add padding top
 
   const WeatherImage({
     Key? key,
     required this.imageUrl,
     required this.width,
     required this.height,
+    this.paddingTop = 0, // Default padding top
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: Image.network(
-        imageUrl,
-        fit: BoxFit.cover,
+    return Padding(
+      padding: EdgeInsets.only(top: paddingTop), // Add top padding
+      child: SizedBox(
+        width: width,
+        height: height,
+        child: Image.network(
+          imageUrl,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
 }
+
 
 class WeatherText extends StatelessWidget {
   final String text;
@@ -146,6 +152,60 @@ class WeatherText extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
+      ),
+    );
+  }
+}
+
+class ExtraLeftIcon extends StatelessWidget {
+  final String fieldOneName;
+  final String fieldOneValue;
+  final String iconPath;
+  final double iconWidth;
+  final double iconHeight;
+
+  const ExtraLeftIcon({
+    Key? key,
+    required this.fieldOneValue,
+    required this.iconPath,
+    required this.fieldOneName,
+    required this.iconHeight,
+    required this.iconWidth,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0), // Add padding here
+      child: Container(
+        color: Colors.red.withOpacity(0.1), // Set blue color with transparency
+        child: Row(
+          children: [
+            // First Column
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image.asset(
+                  iconPath,
+                  width: iconWidth,
+                  height: iconHeight,
+                  color: Colors.white,
+
+                ),
+                // Add more widgets as needed
+              ],
+            ),
+            const SizedBox(width: 20.0), // Add spacing between columns
+            // Second Column
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start, // Align text to the right
+              children: [
+                Text('$fieldOneName: $fieldOneValue', style: const TextStyle(fontSize: 20, color: Colors.white)),
+                // Add more widgets as needed
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

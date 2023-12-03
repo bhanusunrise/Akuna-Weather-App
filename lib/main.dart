@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
       });
       // Navigate to the info screen after fade-out
       Future.delayed(const Duration(seconds: 1), () async {
-        const String cityName = "Colombo";
+        const String cityName = "Gampaha";
         WeatherService weatherService = WeatherService();
         Weather weather = await weatherService.getWeatherData(cityName);
 
@@ -54,11 +54,23 @@ class _MyHomePageState extends State<MyHomePage> {
         String temperature = "$temp °C";
         String condition = weather.condition;
         String country = weather.country;
-        String geticon = weather.icon;
-        String icon = "http:$geticon";
+        String getIcon = weather.icon;
+        String icon = "http:$getIcon";
+        double getWindSpeed = weather.windSpeed;
+        String windSpeed = "${getWindSpeed}km/h";
+        int getWindDegree = weather.windDegree;
+        String windDegree = "$getWindDegree°";
+        double getPressure = weather.pressure;
+        String pressure = "${getPressure}mbr";
+        int getHumidity = weather.humidity;
+        String humidity = getHumidity.toString();
+        double getPrecipitation = weather.precipitation;
+        String precipitation = getPrecipitation.toString();
+
+
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => InfoScreen(cityName: cityName, temperature: temperature, status: condition, country:country, icon: icon)),
+          MaterialPageRoute(builder: (context) => InfoScreen(cityName: cityName, temperature: temperature, status: condition, country:country, icon: icon, windSpeed: windSpeed, windDegree: windDegree, pressure: pressure, humidity: humidity, precipitation: precipitation)),
         );
       });
     });

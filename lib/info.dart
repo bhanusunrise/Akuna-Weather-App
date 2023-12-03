@@ -7,6 +7,11 @@ class InfoScreen extends StatelessWidget {
   final String temperature;
   final String status;
   final String icon;
+  final String windSpeed;
+  final String windDegree;
+  final String pressure;
+  final String humidity;
+  final String precipitation;
 
   const InfoScreen({
     Key? key,
@@ -15,6 +20,12 @@ class InfoScreen extends StatelessWidget {
     required this.temperature,
     required this.status,
     required this.icon,
+    required this.windSpeed,
+    required this.windDegree,
+    required this.pressure,
+    required this.humidity,
+    required this.precipitation,
+
   }) : super(key: key);
 
   @override
@@ -32,31 +43,14 @@ class InfoScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  WeatherImage(imageUrl: icon, width: 150.0, height: 150.0),
+                  WeatherImage(imageUrl: icon, width: 200.0, height: 200.0, paddingTop: 60,),
                   WeatherText(text: "$status | $temperature"),
-                  SizedBox(height: 20.0), // Add some spacing
-
-                  // Two columns next to each other
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // First Column
-                      Column(
-                        children: [
-                          Text('Left Column Content'),
-                          // Add more widgets as needed
-                        ],
-                      ),
-                      SizedBox(width: 20.0), // Add spacing between columns
-                      // Second Column
-                      Column(
-                        children: [
-                          Text('Right Column Content'),
-                          // Add more widgets as needed
-                        ],
-                      ),
-                    ],
-                  ),
+                  const SizedBox(height: 20.0), // Add some spacing
+                  ExtraLeftIcon(fieldOneName: "Wind Speed ",fieldOneValue: windSpeed, iconPath: 'assets/ui/speed.png', iconHeight: 50, iconWidth: 50,),
+                  ExtraLeftIcon(fieldOneName: "Wind Degree ",fieldOneValue: windDegree, iconPath: 'assets/ui/angle.png', iconHeight: 50, iconWidth: 50,),
+                  ExtraLeftIcon(fieldOneName: "Air Pressure ",fieldOneValue: pressure, iconPath: 'assets/ui/preasure.png', iconHeight: 50, iconWidth: 50,),
+                  ExtraLeftIcon(fieldOneName: "Humidity ",fieldOneValue: humidity, iconPath: 'assets/ui/humidity.png', iconHeight: 50, iconWidth: 50,),
+                  ExtraLeftIcon(fieldOneName: "Precipitation ",fieldOneValue: precipitation, iconPath: 'assets/ui/rain.png', iconHeight: 50, iconWidth: 50,),
                 ],
               ),
             ),
