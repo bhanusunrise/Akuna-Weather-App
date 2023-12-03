@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const InfoScreen()),
+          MaterialPageRoute(builder: (context) => const InfoScreen(cityName: 'Colombo', temperature: '28C', status: 'Cloudy', time:'00:01')),
         );
       });
     });
