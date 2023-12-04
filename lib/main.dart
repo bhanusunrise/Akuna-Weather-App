@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
         int getHumidity = weather.humidity;
         String humidity = getHumidity.toString();
         double getPrecipitation = weather.precipitation;
-        String precipitation = getPrecipitation.toString();
+        String precipitation = "${getPrecipitation}mm";
 
 
         Navigator.push(

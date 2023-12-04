@@ -1,3 +1,4 @@
+import 'package:akuna/search.dart';
 import 'package:flutter/material.dart';
 
 class GradiantFiller extends StatelessWidget {
@@ -54,7 +55,7 @@ class SplashLogo extends StatelessWidget {
   }
 }
 
-class NavBar extends StatelessWidget implements PreferredSizeWidget{
+class NavBar extends StatelessWidget implements PreferredSizeWidget {
   final String cityName;
   final String time;
 
@@ -72,7 +73,11 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget{
 
       leading: Padding(
         padding: const EdgeInsets.only(left: 10.0),
-        child: Image.asset('assets/logo/logo.png', height: 60, width: 60,),
+        child: Image.asset(
+          'assets/logo/logo.png',
+          height: 60,
+          width: 60,
+        ),
       ),
 
       title: Center(
@@ -101,11 +106,25 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget{
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 10.0),
-          child: Image.asset('assets/search/search.png', height: 50, width: 50,),
+          child: IconButton(
+            onPressed: () {
+              // Navigate to the search window here
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SearchScreen()),
+              );
+            },
+            icon: Image.asset(
+              'assets/search/search.png',
+              height: 50,
+              width: 50,
+            ),
+          ),
         ),
       ],
     );
   }
+
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
@@ -139,7 +158,6 @@ class WeatherImage extends StatelessWidget {
     );
   }
 }
-
 
 class WeatherText extends StatelessWidget {
   final String text;
@@ -177,36 +195,96 @@ class ExtraLeftIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0), // Add padding here
-      child: Container(
-        color: Colors.red.withOpacity(0.1), // Set blue color with transparency
-        child: Row(
-          children: [
-            // First Column
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image.asset(
-                  iconPath,
-                  width: iconWidth,
-                  height: iconHeight,
-                  color: Colors.white,
-
-                ),
-                // Add more widgets as needed
-              ],
-            ),
-            const SizedBox(width: 20.0), // Add spacing between columns
-            // Second Column
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start, // Align text to the right
-              children: [
-                Text('$fieldOneName: $fieldOneValue', style: const TextStyle(fontSize: 20, color: Colors.white)),
-                // Add more widgets as needed
-              ],
-            ),
-          ],
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20.0), // Set border radius to 20
+        child: Container(
+          color: Colors.black.withOpacity(0.5), // Set red color with transparency
+          child: Row(
+            children: [
+              // First Column
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    iconPath,
+                    width: iconWidth,
+                    height: iconHeight,
+                    color: Colors.white,
+                  ),
+                  // Add more widgets as needed
+                ],
+              ),
+              const SizedBox(width: 20.0), // Add spacing between columns
+              // Second Column
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start, // Align text to the right
+                children: [
+                  Text('$fieldOneName: $fieldOneValue', style: const TextStyle(fontSize: 20, color: Colors.white)),
+                  // Add more widgets as needed
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+}
+
+class SearchAppBar extends StatefulWidget implements PreferredSizeWidget {
+  final void Function(String) onSearch;
+
+  const SearchAppBar({Key? key, required this.onSearch}) : super(key: key);
+
+  @override
+  _SearchAppBarState createState() => _SearchAppBarState();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class _SearchAppBarState extends State<SearchAppBar> {
+  final TextEditingController _textController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double textInputWidth = screenWidth * 0.75; // 75% of the screen width
+
+    return AppBar(
+      title: null, // Set the title to null for left alignment
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: textInputWidth,
+              child: TextField(
+                controller: _textController,
+                decoration: InputDecoration(
+                  hintText: 'Type Colombo, New York, Helsinki etc.',
+                  border: InputBorder.none,
+                ),
+                onChanged: (value) {
+                  // Handle text field changes
+                },
+              ),
+            ),
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                widget.onSearch(_textController.text);
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
   }
 }
