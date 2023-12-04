@@ -1,16 +1,11 @@
 # akuna
 
-A new Flutter project.
+akuna is my first cross platform mobile application which is developed from Flutter. This is a weather application which works with weatherAPI to get weather.
 
-## Getting Started
+## How to download the application
 
-This project is a starting point for a Flutter application.
+1. Open your VS code.
+2. Open a terminal
+3. Select your folder location by using 'cd' command
+4. Type 'gh repo clone bhanusunrise/Akuna-Weather-App'
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
