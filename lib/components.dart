@@ -1,5 +1,9 @@
 import 'package:akuna/search.dart';
+import 'package:akuna/services/weather_service.dart';
 import 'package:flutter/material.dart';
+
+import 'info.dart';
+import 'model/weather.dart';
 
 class GradiantFiller extends StatelessWidget {
   final List<Color> gradientColors;
@@ -116,8 +120,8 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
             },
             icon: Image.asset(
               'assets/search/search.png',
-              height: 50,
-              width: 50,
+              height: 40,
+              width: 40,
             ),
           ),
         ),
@@ -253,27 +257,61 @@ class _SearchAppBarState extends State<SearchAppBar> {
 
     return AppBar(
       title: null, // Set the title to null for left alignment
+      backgroundColor: Colors.transparent,
+      elevation: 0, // Remove the elevation
       actions: [
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               width: textInputWidth,
               child: TextField(
                 controller: _textController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Type Colombo, New York, Helsinki etc.',
                   border: InputBorder.none,
+                  hintStyle: TextStyle(color: Colors.white),
                 ),
+                style: const TextStyle(color: Colors.white), // Set the text color
                 onChanged: (value) {
                   // Handle text field changes
                 },
-              ),
+              )
+
             ),
             IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
+              icon: Image.asset(
+                'assets/search/search.png',
+                height: 40,
+                width: 40,),
+              onPressed: () async {
                 widget.onSearch(_textController.text);
+                String cityName = _textController.text;
+                WeatherService weatherService = WeatherService();
+                Weather weather = await weatherService.getWeatherData(cityName);
+
+                double temp = weather.currentTemp;
+                String temperature = "$temp °C";
+                String condition = weather.condition;
+                String country = weather.country;
+                String getIcon = weather.icon;
+                String icon = "http:$getIcon";
+                double getWindSpeed = weather.windSpeed;
+                String windSpeed = "${getWindSpeed}km/h";
+                int getWindDegree = weather.windDegree;
+                String windDegree = "$getWindDegree°";
+                double getPressure = weather.pressure;
+                String pressure = "${getPressure}mbr";
+                int getHumidity = weather.humidity;
+                String humidity = getHumidity.toString();
+                double getPrecipitation = weather.precipitation;
+                String precipitation = "${getPrecipitation}mm";
+
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => InfoScreen(cityName: cityName, temperature: temperature, status: condition, country:country, icon: icon, windSpeed: windSpeed, windDegree: windDegree, pressure: pressure, humidity: humidity, precipitation: precipitation)),
+                );
               },
             ),
           ],

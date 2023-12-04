@@ -8,6 +8,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: SearchAppBar(
         onSearch: (searchText) {
           // Handle search
@@ -15,8 +16,10 @@ class SearchScreen extends StatelessWidget {
           cityName = searchText;
         },
       ),
-      body: Center(
-        child: Text(cityName),
+      body: const Center(
+        child: GradiantFiller(),
+        //child: Text(cityName),
+
       ),
     );
   }
