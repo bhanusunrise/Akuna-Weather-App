@@ -50,7 +50,7 @@ class InfoScreen extends StatelessWidget {
                   ExtraLeftIcon(fieldOneName: "Wind Degree ",fieldOneValue: windDegree, iconPath: 'assets/ui/angle.png', iconHeight: 50, iconWidth: 50,),
                   ExtraLeftIcon(fieldOneName: "Air Pressure ",fieldOneValue: pressure, iconPath: 'assets/ui/preasure.png', iconHeight: 50, iconWidth: 50,),
                   ExtraLeftIcon(fieldOneName: "Humidity ",fieldOneValue: humidity, iconPath: 'assets/ui/humidity.png', iconHeight: 50, iconWidth: 50,),
-                  ExtraLeftIcon(fieldOneName: "precipitation ",fieldOneValue: windSpeed, iconPath: 'assets/ui/rain.png', iconHeight: 50, iconWidth: 50,),
+                  ExtraLeftIcon(fieldOneName: "precipitation ",fieldOneValue: precipitation, iconPath: 'assets/ui/rain.png', iconHeight: 50, iconWidth: 50,),
 
                 ],
               ),

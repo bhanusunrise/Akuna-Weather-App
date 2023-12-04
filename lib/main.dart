@@ -57,15 +57,17 @@ class _MyHomePageState extends State<MyHomePage> {
         String getIcon = weather.icon;
         String icon = "http:$getIcon";
         double getWindSpeed = weather.windSpeed;
-        String windSpeed = "${getWindSpeed}km/h";
+        String windSpeed = "$getWindSpeed km/h";
         int getWindDegree = weather.windDegree;
         String windDegree = "$getWindDegree°";
         double getPressure = weather.pressure;
-        String pressure = "${getPressure}mbr";
+        String pressure = "$getPressure mbr";
         int getHumidity = weather.humidity;
         String humidity = getHumidity.toString();
         double getPrecipitation = weather.precipitation;
-        String precipitation = "${getPrecipitation}mm";
+        String precipitation = "$getPrecipitation mm";
+
+        print(precipitation);
 
 
         Navigator.push(
