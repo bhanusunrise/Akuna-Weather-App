@@ -202,7 +202,7 @@ class ExtraLeftIcon extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20.0), // Set border radius to 20
         child: Container(
-          color: Colors.black.withOpacity(0.5), // Set red color with transparency
+          color: Colors.white.withOpacity(0.1), // Set red color with transparency
           child: Row(
             children: [
               // First Column
